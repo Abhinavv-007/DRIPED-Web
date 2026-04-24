@@ -1,0 +1,13 @@
+{
+  "name": "driped-web",
+  "private": true,
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "dev": "pnpm --filter @driped/web dev",
+    "dev:worker": "pnpm --filter driped-worker dev",
+    "build": "pnpm --filter @driped/web build",
+    "deploy:worker": "pnpm --filter driped-worker deploy",
+    "lint": "pnpm --filter @driped/web lint",
+    "typecheck": "pnpm -r exec tsc --noEmit"
+  }
+}

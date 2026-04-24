@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# Wrangler + build artefacts
+.wrangler/
+dist/
+*.tsbuildinfo
+
+# secrets (never commit)
+.dev.vars
+.dev.vars.local
+.env
+.env.local
+
+# macOS / editor noise
+.DS_Store
+.idea/
+.vscode/
+*.log

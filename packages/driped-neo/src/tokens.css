@@ -1,0 +1,267 @@
+/*
+ * @driped/neo — Playful Neo-Brutal + Dark design tokens.
+ * Dark-first. Light is the variant applied by removing `.dark` class.
+ *
+ * Every token name is stable across web + Flutter.
+ */
+
+:root,
+.dark {
+  /* Surfaces */
+  --neo-bg:             #0E0B08;
+  --neo-surface:        #1A1612;
+  --neo-surface-raised: #241E18;
+  --neo-surface-sunken: #0A0705;
+
+  /* Ink (text) */
+  --neo-ink:         #F7F1E4;
+  --neo-ink-mid:     #C8BFAC;
+  --neo-ink-low:     #8C836F;
+  --neo-ink-ghost:   #4A4338;
+
+  /* Accent — the gold */
+  --neo-gold:        #E8B168;
+  --neo-gold-deep:   #C4894B;
+  --neo-gold-soft:   #3A2E1E;
+  --neo-cream:       #FFF3D6;
+
+  /* Borders */
+  --neo-border:      var(--neo-ink);
+  --neo-border-soft: var(--neo-ink-ghost);
+
+  /* Playful pastels that pop on dark */
+  --neo-mint:  #B8F0C9;
+  --neo-coral: #FFAE9B;
+  --neo-sky:   #9BD4FF;
+  --neo-lilac: #D9BBFF;
+  --neo-lemon: #FFE58A;
+
+  /* Semantic */
+  --neo-success: #34D97A;
+  --neo-warning: #FFC53B;
+  --neo-danger:  #FF5B5B;
+  --neo-info:    #5BAEFF;
+
+  /* Hard-offset shadows (never blurred) */
+  --neo-shadow-sm:     2px 2px 0 0 var(--neo-ink);
+  --neo-shadow-md:     4px 4px 0 0 var(--neo-ink);
+  --neo-shadow-lg:     6px 6px 0 0 var(--neo-ink);
+  --neo-shadow-gold:   4px 4px 0 0 var(--neo-gold);
+  --neo-shadow-danger: 4px 4px 0 0 var(--neo-danger);
+  --neo-shadow-inset:  inset 2px 2px 0 0 var(--neo-ink-ghost);
+
+  /* Radii */
+  --neo-r-sm:   6px;
+  --neo-r-md:  10px;
+  --neo-r-lg:  12px;
+  --neo-r-xl:  16px;
+  --neo-r-2xl: 20px;
+  --neo-r-pill: 999px;
+
+  /* Borders */
+  --neo-b-thin:  1px;
+  --neo-b-base:  2px;
+  --neo-b-thick: 3px;
+
+  /* Motion */
+  --neo-dur-fast: 80ms;
+  --neo-dur-base: 150ms;
+  --neo-dur-slow: 300ms;
+  --neo-ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+  --neo-ease-inout:  cubic-bezier(0.65, 0, 0.35, 1);
+  --neo-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  /* Typography */
+  --neo-font-sans:    'Inter', system-ui, -apple-system, sans-serif;
+  --neo-font-heading: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --neo-font-mono:    'JetBrains Mono', ui-monospace, monospace;
+}
+
+/* Light variant — override `.dark` defaults when `.light` is explicit, but
+   the primary page class toggles only `.dark`. Keep this for systems that
+   want to force light. */
+.light {
+  --neo-bg:             #FFF8F0;
+  --neo-surface:        #FFFFFF;
+  --neo-surface-raised: #FFF0DB;
+  --neo-surface-sunken: #F5EDE3;
+
+  --neo-ink:       #1A1612;
+  --neo-ink-mid:   #4A4338;
+  --neo-ink-low:   #7A6E63;
+  --neo-ink-ghost: #C8BFAC;
+
+  --neo-gold:      #C4894B;
+  --neo-gold-deep: #A26F37;
+  --neo-gold-soft: #F5E7D3;
+  --neo-cream:     #FFF3D6;
+
+  --neo-border:      var(--neo-ink);
+  --neo-border-soft: var(--neo-ink-ghost);
+
+  --neo-mint:  #8FE3A7;
+  --neo-coral: #FF8F78;
+  --neo-sky:   #6FBFFF;
+  --neo-lilac: #B89BFF;
+  --neo-lemon: #FFD060;
+
+  --neo-success: #00A650;
+  --neo-warning: #D9A100;
+  --neo-danger:  #D93A3A;
+  --neo-info:    #2B7ED9;
+
+  --neo-shadow-sm:     2px 2px 0 0 var(--neo-ink);
+  --neo-shadow-md:     4px 4px 0 0 var(--neo-ink);
+  --neo-shadow-lg:     6px 6px 0 0 var(--neo-ink);
+  --neo-shadow-gold:   4px 4px 0 0 var(--neo-gold);
+  --neo-shadow-danger: 4px 4px 0 0 var(--neo-danger);
+  --neo-shadow-inset:  inset 2px 2px 0 0 var(--neo-ink-ghost);
+}
+
+/* ─────────────────────────────────────────────────────────
+ * Neo component primitives — class-based for portability.
+ * Tailwind utilities re-implement these in @driped/neo's
+ * Tailwind preset, but these raw classes work anywhere.
+ * ───────────────────────────────────────────────────────── */
+
+.neo-card {
+  background: var(--neo-surface);
+  color: var(--neo-ink);
+  border: var(--neo-b-base) solid var(--neo-border);
+  border-radius: var(--neo-r-xl);
+  box-shadow: var(--neo-shadow-md);
+  transition: transform var(--neo-dur-base) var(--neo-ease-out),
+              box-shadow var(--neo-dur-base) var(--neo-ease-out);
+}
+.neo-card:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--neo-shadow-lg);
+}
+
+.neo-card-flat {
+  background: var(--neo-surface);
+  color: var(--neo-ink);
+  border: var(--neo-b-base) solid var(--neo-border);
+  border-radius: var(--neo-r-xl);
+  box-shadow: var(--neo-shadow-sm);
+}
+
+.neo-card-raised {
+  background: var(--neo-surface-raised);
+  color: var(--neo-ink);
+  border: var(--neo-b-base) solid var(--neo-border);
+  border-radius: var(--neo-r-xl);
+  box-shadow: var(--neo-shadow-md);
+}
+
+.neo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-family: var(--neo-font-heading);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -0.01em;
+  border: var(--neo-b-base) solid var(--neo-border);
+  border-radius: var(--neo-r-lg);
+  background: var(--neo-surface);
+  color: var(--neo-ink);
+  box-shadow: var(--neo-shadow-sm);
+  cursor: pointer;
+  user-select: none;
+  transition: transform var(--neo-dur-fast) var(--neo-ease-out),
+              box-shadow var(--neo-dur-fast) var(--neo-ease-out);
+}
+.neo-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: var(--neo-shadow-md);
+}
+.neo-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0 0 0 0 transparent;
+}
+.neo-btn--primary {
+  background: var(--neo-gold);
+  color: #1A1612;
+  box-shadow: var(--neo-shadow-md);
+}
+.neo-btn--primary:hover {
+  box-shadow: var(--neo-shadow-lg);
+}
+.neo-btn--danger {
+  background: var(--neo-danger);
+  color: #FFF3D6;
+}
+.neo-btn--ghost {
+  background: transparent;
+  box-shadow: 0 0 0 0 transparent;
+}
+.neo-btn--ghost:hover {
+  background: var(--neo-surface-raised);
+  box-shadow: var(--neo-shadow-sm);
+}
+
+.neo-input {
+  width: 100%;
+  padding: 10px 14px;
+  font-family: var(--neo-font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--neo-ink);
+  background: var(--neo-surface);
+  border: var(--neo-b-base) solid var(--neo-border);
+  border-radius: var(--neo-r-md);
+  box-shadow: var(--neo-shadow-sm);
+  outline: none;
+  transition: box-shadow var(--neo-dur-base) var(--neo-ease-out);
+}
+.neo-input:focus {
+  box-shadow: var(--neo-shadow-gold);
+}
+
+.neo-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  font-family: var(--neo-font-heading);
+  font-weight: 900;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  border: var(--neo-b-base) solid var(--neo-border);
+  border-radius: var(--neo-r-sm);
+  background: var(--neo-surface-raised);
+  color: var(--neo-ink);
+  box-shadow: var(--neo-shadow-sm);
+}
+
+.neo-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  font-family: var(--neo-font-heading);
+  font-weight: 700;
+  font-size: 12px;
+  border: var(--neo-b-base) solid var(--neo-border);
+  border-radius: var(--neo-r-pill);
+  background: var(--neo-surface);
+}
+
+/* KBD style — for command palette hints */
+.neo-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-family: var(--neo-font-mono);
+  font-weight: 700;
+  font-size: 10px;
+  border: var(--neo-b-base) solid var(--neo-ink-ghost);
+  border-radius: var(--neo-r-sm);
+  background: var(--neo-surface-raised);
+  box-shadow: 1px 1px 0 0 var(--neo-ink-ghost);
+}

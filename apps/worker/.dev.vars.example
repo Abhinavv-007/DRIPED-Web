@@ -1,0 +1,18 @@
+# ============================================================
+# Driped Worker \u2014 local dev secrets template
+# ------------------------------------------------------------
+# Copy this file to `.dev.vars` for `wrangler dev`.
+# Production secrets are set via `wrangler secret put`.
+# NEVER commit the real .dev.vars file.
+# ============================================================
+
+# VAPID keypair for Web Push. Generate via:
+#   node ../ops/deploy/gen-vapid.mjs
+# The private key is a base64url-encoded JWK JSON string.
+VAPID_PUBLIC_KEY=replace_me
+VAPID_PRIVATE_KEY=replace_me
+VAPID_SUBJECT=mailto:admin@driped.in
+
+# Optional: Firebase Cloud Messaging server key (for Android push)
+# Only required if the Flutter app switches on FCM server-push later.
+FCM_SERVER_KEY=replace_me

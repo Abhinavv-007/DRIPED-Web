@@ -1,0 +1,66 @@
+name = "driped-worker"
+main = "src/index.ts"
+compatibility_date = "2026-04-13"
+compatibility_flags = ["nodejs_compat"]
+
+[[kv_namespaces]]
+binding = "KV"
+id = "381e7097f1a44b3d93c211ae817cec4b"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "driped-db"
+database_id = "b2fa837d-7929-465e-9190-c54c61a68ae5"
+
+# Workers AI binding \u2014 needed for /scan/extract LLM pass
+[ai]
+binding = "AI"
+
+[vars]
+FIREBASE_PROJECT_ID = "driped-login"
+EXCHANGE_RATE_API_KEY = "65938f4994589a13920b4985"
+VAPID_SUBJECT = "mailto:admin@driped.in"
+# VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY / FCM_SERVER_KEY \u2014 set via `wrangler secret put`
+
+[triggers]
+crons = [
+  "30 18 * * *",   # currency refresh \u2014 midnight IST
+  "0 3 * * *",     # renewal reminders \u2014 09:00 IST
+  "0 4 1 * *",     # monthly summary \u2014 1st of month
+]
+
+# ─── Production env ───
+# Deploy with `wrangler deploy --env production`
+# Custom domain `api.driped.in` attached via Cloudflare routes dashboard once
+# `driped.in` zone is added to the account.
+[env.production]
+name = "driped-worker-prod"
+
+[env.production.vars]
+FIREBASE_PROJECT_ID = "driped-login"
+EXCHANGE_RATE_API_KEY = "65938f4994589a13920b4985"
+VAPID_SUBJECT = "mailto:admin@driped.in"
+
+[[env.production.routes]]
+pattern = "api.driped.in/*"
+zone_name = "driped.in"
+
+[[env.production.kv_namespaces]]
+binding = "KV"
+id = "381e7097f1a44b3d93c211ae817cec4b"
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "driped-db"
+database_id = "b2fa837d-7929-465e-9190-c54c61a68ae5"
+
+[env.production.ai]
+binding = "AI"
+
+[env.production.triggers]
+crons = [
+  "30 18 * * *",
+  "0 3 * * *",
+  "0 4 1 * *",
+]
+

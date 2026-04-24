@@ -1,0 +1,19 @@
+{
+  "name": "@driped/scan",
+  "version": "0.1.0",
+  "description": "Driped \u2014 multi-pass subscription extractor. Works in browsers, Node, and Cloudflare Workers.",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./merchants": "./src/merchants.ts"
+  },
+  "files": [
+    "src"
+  ]
+}
