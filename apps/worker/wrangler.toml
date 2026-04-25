@@ -23,10 +23,11 @@ VAPID_SUBJECT = "mailto:admin@driped.in"
 # VAPID_PUBLIC_KEY / VAPID_PRIVATE_KEY / FCM_SERVER_KEY \u2014 set via `wrangler secret put`
 
 [triggers]
+# Two crons keep us under Cloudflare's 5-cron-per-account free-plan limit.
+# The renewal cron also fires the monthly summary internally on the 1st.
 crons = [
-  "30 18 * * *",   # currency refresh \u2014 midnight IST
-  "0 3 * * *",     # renewal reminders \u2014 09:00 IST
-  "0 4 1 * *",     # monthly summary \u2014 1st of month
+  "30 18 * * *",   # currency refresh \u2014 00:00 IST
+  "0 3 * * *",     # renewal reminders + (1st of month) monthly summary \u2014 08:30 IST
 ]
 
 # ─── Production env ───
@@ -34,16 +35,21 @@ crons = [
 # Custom domain `api.driped.in` attached via Cloudflare routes dashboard once
 # `driped.in` zone is added to the account.
 [env.production]
-name = "driped-worker-prod"
+# Slug shown in the Cloudflare dashboard. Custom domain api.driped.in
+# is attached via [[env.production.routes]] below.
+name = "driped-api"
 
 [env.production.vars]
 FIREBASE_PROJECT_ID = "driped-login"
 EXCHANGE_RATE_API_KEY = "65938f4994589a13920b4985"
 VAPID_SUBJECT = "mailto:admin@driped.in"
 
+# Workers Custom Domain: auto-creates the DNS A/AAAA record AND attaches the
+# Worker behind the orange-cloud proxy. Replaces the older route + zone setup
+# which required an existing DNS record.
 [[env.production.routes]]
-pattern = "api.driped.in/*"
-zone_name = "driped.in"
+pattern = "api.driped.in"
+custom_domain = true
 
 [[env.production.kv_namespaces]]
 binding = "KV"
@@ -61,6 +67,5 @@ binding = "AI"
 crons = [
   "30 18 * * *",
   "0 3 * * *",
-  "0 4 1 * *",
 ]
 

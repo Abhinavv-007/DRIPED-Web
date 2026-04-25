@@ -106,14 +106,17 @@ export default {
             // Legacy: currency refresh (18:30 UTC = midnight IST)
             await getCurrencyRates(env.KV, env.EXCHANGE_RATE_API_KEY, { forceRefresh: true });
             break;
-          case '0 3 * * *':
-            // Daily renewal reminders (03:30 UTC = 09:00 IST)
+          case '0 3 * * *': {
+            // Daily renewal reminders (03:00 UTC = 08:30 IST).
+            // On the 1st of each month, also kick off the monthly summary in
+            // the same trigger so we stay within the 5-cron account limit.
             await dispatchRenewalReminders(env);
+            const utc = new Date();
+            if (utc.getUTCDate() === 1) {
+              await dispatchMonthlySummary(env);
+            }
             break;
-          case '0 4 1 * *':
-            // 1st of month monthly summary
-            await dispatchMonthlySummary(env);
-            break;
+          }
           default:
             // Fallback: always refresh currency
             await getCurrencyRates(env.KV, env.EXCHANGE_RATE_API_KEY, { forceRefresh: true });

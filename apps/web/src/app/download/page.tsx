@@ -16,12 +16,13 @@ import {
 } from "lucide-react";
 
 /**
- * Flip this to `true` and drop `driped-android.apk` into `/public/`
- * when the APK is ready. Until then the CTA shows "APK coming soon"
- * so we never point to a broken link.
+ * APK is hosted as a GitHub Release asset (the binary is too large for git
+ * itself but releases have no size cap). Update `APK_VERSION` + bump the
+ * GitHub release tag to ship a new build.
  */
-const APK_AVAILABLE = false;
-const APK_PATH = "/driped-android.apk";
+const APK_AVAILABLE = true;
+const APK_VERSION = "v1.0.0";
+const APK_PATH = `https://github.com/Abhinavv-007/DRIPED-Web/releases/download/${APK_VERSION}/driped-android.apk`;
 const APK_FILENAME = "driped-android.apk";
 
 export default function DownloadPage() {
@@ -89,7 +90,7 @@ export default function DownloadPage() {
               Release
             </p>
             <p className="mt-1 text-xl font-black text-foreground">
-              Driped v1.0 \u2022 Android 8.0+
+              Driped {APK_VERSION} \u2022 Android 8.0+
             </p>
             <p className="mt-2 max-w-lg text-sm font-semibold text-foreground/75">
               Signed APK. Sign in with the same Google account you use on the

@@ -35,6 +35,9 @@ yarn-error.log*
 # …but always commit the template so new contributors know what to set:
 !.env.example
 
+# Large binaries served from GitHub Releases instead of git
+public/*.apk
+
 # vercel
 .vercel
 
