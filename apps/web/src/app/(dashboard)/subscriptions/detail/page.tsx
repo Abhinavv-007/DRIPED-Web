@@ -1,7 +1,7 @@
 "use client";
 
-import { use, useMemo, useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useMemo, useState, type FormEvent } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -51,12 +51,27 @@ import type { BillingCycle, Subscription, SubscriptionStatus } from "@/lib/model
 const BILLING_CYCLES: BillingCycle[] = ["weekly", "monthly", "quarterly", "yearly", "lifetime"];
 const SUB_STATUSES: SubscriptionStatus[] = ["active", "trial", "paused", "cancelled", "archived"];
 
-export default function SubscriptionDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+export default function SubscriptionDetailPage() {
+  return (
+    <Suspense fallback={<DetailPageSkeleton />}>
+      <SubscriptionDetailInner />
+    </Suspense>
+  );
+}
+
+function DetailPageSkeleton() {
+  return (
+    <div className="space-y-3 p-6">
+      <Skeleton className="h-8 w-40" />
+      <Skeleton className="h-40 w-full" />
+      <Skeleton className="h-64 w-full" />
+    </div>
+  );
+}
+
+function SubscriptionDetailInner() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id") ?? "";
   const router = useRouter();
   const { data: subs, isLoading } = useSubscriptions();
   const { data: pms } = usePaymentMethods();

@@ -250,7 +250,7 @@ export default function HomePage() {
                   {upcomingRenewals.map(({ sub, days }) => (
                     <Link
                       key={sub.id}
-                      href={`/subscriptions/${sub.id}`}
+                      href={`/subscriptions/detail?id=${sub.id}`}
                       className="brutal-card-flat flex items-center gap-3 p-2.5 transition-all hover:-translate-y-0.5"
                       style={{ transition: "transform 0.15s" }}
                     >
@@ -336,7 +336,7 @@ export default function HomePage() {
                     return (
                       <Link
                         key={pm.id}
-                        href={`/payments/${pm.id}`}
+                        href={`/payments/detail?id=${pm.id}`}
                         className="brutal-card-flat flex items-center gap-3 p-2.5 transition-all hover:-translate-y-0.5"
                         style={{ transition: "transform 0.15s" }}
                       >
@@ -378,7 +378,7 @@ export default function HomePage() {
               {activeSubs.slice(0, 6).map((sub) => (
                 <Link
                   key={sub.id}
-                  href={`/subscriptions/${sub.id}`}
+                  href={`/subscriptions/detail?id=${sub.id}`}
                   className="brutal-card-flat flex items-center gap-3 p-3 transition-all hover:-translate-y-0.5"
                   style={{ transition: "transform 0.15s" }}
                 >

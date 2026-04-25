@@ -167,7 +167,7 @@ export default function PaymentsPage() {
                 transition={{ delay: i * 0.04 }}
               >
                 <Link
-                  href={`/payments/${pm.id}`}
+                  href={`/payments/detail?id=${pm.id}`}
                   className="glass-card flex flex-col gap-3 p-5 transition-all hover:border-primary/30 hover:shadow-md"
                 >
                   <div className="flex items-start justify-between">

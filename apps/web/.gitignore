@@ -41,6 +41,13 @@ public/*.apk
 # vercel
 .vercel
 
+# Cloudflare Pages / OpenNext build artifacts
+.open-next/
+out/
+
+# wrangler
+.wrangler/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

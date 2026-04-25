@@ -1,7 +1,7 @@
 "use client";
 
-import { use, useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { Suspense, useMemo } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { ArrowLeft, Trash2, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -25,12 +25,27 @@ import { PaymentMethodIcon } from "@/components/shared/payment-method-icon";
 import { toast } from "sonner";
 import Link from "next/link";
 
-export default function PaymentMethodDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
-  const { id } = use(params);
+export default function PaymentMethodDetailPage() {
+  return (
+    <Suspense fallback={<DetailSkeleton />}>
+      <PaymentMethodDetailInner />
+    </Suspense>
+  );
+}
+
+function DetailSkeleton() {
+  return (
+    <div className="space-y-3 p-6">
+      <Skeleton className="h-8 w-32" />
+      <Skeleton className="h-32 w-full" />
+      <Skeleton className="h-48 w-full" />
+    </div>
+  );
+}
+
+function PaymentMethodDetailInner() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id") ?? "";
   const router = useRouter();
   const { data: pms, isLoading } = usePaymentMethods();
   const { data: subs } = useSubscriptions();
@@ -171,7 +186,7 @@ export default function PaymentMethodDetailPage({
           {linked.map((sub) => (
             <Link
               key={sub.id}
-              href={`/subscriptions/${sub.id}`}
+              href={`/subscriptions/detail?id=${sub.id}`}
               className="flex items-center gap-3 rounded-xl p-2.5 transition-colors hover:bg-accent/50"
             >
               <ServiceAvatar

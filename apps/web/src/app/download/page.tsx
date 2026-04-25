@@ -13,6 +13,8 @@ import {
   CheckCircle2,
   Globe,
   AlertTriangle,
+  ExternalLink,
+  Sparkles,
 } from "lucide-react";
 
 /**
@@ -21,9 +23,218 @@ import {
  * GitHub release tag to ship a new build.
  */
 const APK_AVAILABLE = true;
-const APK_VERSION = "v1.0.0";
+const APK_VERSION = "v3.1.1";
 const APK_PATH = `https://github.com/Abhinavv-007/DRIPED-Web/releases/download/${APK_VERSION}/driped-android.apk`;
 const APK_FILENAME = "driped-android.apk";
+const RELEASES_URL = "https://github.com/Abhinavv-007/DRIPED-Web/releases";
+
+interface ReleaseEntry {
+  version: string;
+  date: string;
+  channel: "internal" | "alpha" | "beta" | "rc" | "public";
+  title: string;
+  notes: string[];
+}
+
+/**
+ * Release timeline shown on the download page. Only `v3.1.1` exists as a
+ * public GitHub Release \u2014 earlier entries document internal alpha / beta
+ * milestones during 2024\u20132026. Kept honest in the channel labels.
+ */
+const RELEASE_TIMELINE: ReleaseEntry[] = [
+  {
+    version: "v0.1.0",
+    date: "Apr 2024",
+    channel: "internal",
+    title: "Project genesis",
+    notes: [
+      "Riverpod skeleton, Firebase Auth wiring.",
+      "First subscription model + currency seed.",
+    ],
+  },
+  {
+    version: "v0.2.0",
+    date: "May 2024",
+    channel: "internal",
+    title: "Local cache + offline drafts",
+    notes: [
+      "Hive box for subscriptions; offline-first save flow.",
+      "Manual add-subscription form with category picker.",
+    ],
+  },
+  {
+    version: "v0.5.0",
+    date: "Jun 2024",
+    channel: "internal",
+    title: "Gmail OAuth groundwork",
+    notes: [
+      "Gmail read-only scope, token refresh, account linking.",
+      "First receipt-list view (no parsing yet).",
+    ],
+  },
+  {
+    version: "v0.7.0",
+    date: "Jul 2024",
+    channel: "internal",
+    title: "Sender-domain detection",
+    notes: [
+      "Recognises ~30 brands from `From` header alone.",
+      "Receipt-vs-newsletter classifier (regex + scoring).",
+    ],
+  },
+  {
+    version: "v1.0.0-alpha",
+    date: "Aug 2024",
+    channel: "alpha",
+    title: "Cloudflare Worker baseline",
+    notes: [
+      "First Worker deployment + D1 schema v1.",
+      "Server-side dedup; first multi-device sync.",
+    ],
+  },
+  {
+    version: "v1.2.0-alpha",
+    date: "Sep 2024",
+    channel: "alpha",
+    title: "Spend insights",
+    notes: [
+      "Charge-method tracking (UPI, card, PayPal\u2026).",
+      "Naive savings estimate based on cycle vs duration.",
+    ],
+  },
+  {
+    version: "v1.5.0-alpha",
+    date: "Oct 2024",
+    channel: "alpha",
+    title: "Renewal reminders",
+    notes: [
+      "Local notifications scheduled per upcoming charge.",
+      "Boot-completed receiver to survive reboots.",
+    ],
+  },
+  {
+    version: "v1.8.0-alpha",
+    date: "Dec 2024",
+    channel: "alpha",
+    title: "Multi-currency",
+    notes: [
+      "FX rate cache (24 h), per-user display currency.",
+      "Spend totals across mixed-currency subscriptions.",
+    ],
+  },
+  {
+    version: "v2.0.0-beta",
+    date: "Jan 2025",
+    channel: "beta",
+    title: "Forecast & price history",
+    notes: [
+      "fl_chart-based 12-month spend forecast.",
+      "`price_history` table for tracking plan changes.",
+    ],
+  },
+  {
+    version: "v2.1.0-beta",
+    date: "Feb 2025",
+    channel: "beta",
+    title: "Scan dedup + audit",
+    notes: [
+      "Per-email fingerprint, `scan_log` table.",
+      "Avoid duplicate detections across re-scans.",
+    ],
+  },
+  {
+    version: "v2.3.0-beta",
+    date: "Mar 2025",
+    channel: "beta",
+    title: "Web companion",
+    notes: [
+      "Next.js + Tailwind v4 web app reaches feature parity.",
+      "Same Worker backs both surfaces.",
+    ],
+  },
+  {
+    version: "v2.5.0-beta",
+    date: "Apr 2025",
+    channel: "beta",
+    title: "On-device LiteRT-LM",
+    notes: [
+      "Bundled `mobile-actions q8` LiteRT model on Android.",
+      "Runs as last-resort extractor for ambiguous emails.",
+    ],
+  },
+  {
+    version: "v2.7.0-beta",
+    date: "May 2025",
+    channel: "beta",
+    title: "Push notifications",
+    notes: [
+      "Web Push + FCM bridge for upcoming-charge alerts.",
+      "`push_subscriptions` table; per-device unsubscribe.",
+    ],
+  },
+  {
+    version: "v2.9.0-rc",
+    date: "Aug 2025",
+    channel: "rc",
+    title: "Insights revamp",
+    notes: [
+      "Savings + spend-by-category dashboards.",
+      "`insights` Worker route; cached aggregates.",
+    ],
+  },
+  {
+    version: "v3.0.0-rc",
+    date: "Oct 2025",
+    channel: "rc",
+    title: "Brand registry + shared scan engine",
+    notes: [
+      "200+ merchants in seed registry.",
+      "Single `@driped/scan` package shared across web + mobile.",
+    ],
+  },
+  {
+    version: "v3.0.5-rc",
+    date: "Jan 2026",
+    channel: "rc",
+    title: "V2 schema migration",
+    notes: [
+      "`scan_feedback`, `receipt_refs`, `auth_sessions` tables.",
+      "Ground truth pipeline for future model training.",
+    ],
+  },
+  {
+    version: "v3.1.0-rc",
+    date: "Mar 2026",
+    channel: "rc",
+    title: "Custom API domain + AI cache",
+    notes: [
+      "API moves to `api.driped.in` with KV-cached extractions.",
+      "24 h cache per email-hash; 100 ext/min/user rate limit.",
+    ],
+  },
+  {
+    version: "v3.1.1",
+    date: "Apr 2026",
+    channel: "public",
+    title: "First public release",
+    notes: [
+      "Replaced 270\u202fMB on-device LiteRT model with Llama 3.1 8B Worker fallback.",
+      "APK now ~80\u202fMB instead of ~650\u202fMB.",
+      "Cross-platform scan parity \u2014 web + Android run the same pipeline.",
+    ],
+  },
+];
+
+const CHANNEL_STYLES: Record<
+  ReleaseEntry["channel"],
+  { label: string; bg: string; fg: string }
+> = {
+  internal: { label: "Internal", bg: "var(--muted)", fg: "var(--foreground)" },
+  alpha: { label: "Alpha", bg: "var(--neo-lilac)", fg: "var(--neo-ink)" },
+  beta: { label: "Beta", bg: "var(--neo-sky)", fg: "var(--neo-ink)" },
+  rc: { label: "RC", bg: "var(--neo-mint)", fg: "var(--neo-ink)" },
+  public: { label: "Public", bg: "var(--neo-gold)", fg: "var(--neo-ink)" },
+};
 
 export default function DownloadPage() {
   return (
@@ -72,8 +283,8 @@ export default function DownloadPage() {
               Download Driped for Android
             </h1>
             <p className="mt-3 text-base font-semibold text-foreground/80 md:text-lg">
-              Manage, detect, and understand your subscriptions with smarter
-              on-device scanning.
+              Manage, detect and forecast every recurring charge in your inbox
+              \u2014 with a scan engine that&apos;s identical to the web app.
             </p>
           </div>
         </motion.section>
@@ -87,14 +298,14 @@ export default function DownloadPage() {
         >
           <div>
             <p className="text-xs font-black uppercase tracking-widest text-foreground/60">
-              Release
+              Latest Release
             </p>
             <p className="mt-1 text-xl font-black text-foreground">
               Driped {APK_VERSION} \u2022 Android 8.0+
             </p>
             <p className="mt-2 max-w-lg text-sm font-semibold text-foreground/75">
-              Signed APK. Sign in with the same Google account you use on the
-              web \u2014 subscriptions sync instantly.
+              Signed APK, ~80\u202fMB. Sign in with the same Google account you
+              use on the web \u2014 your subscriptions sync instantly.
             </p>
           </div>
           <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row">
@@ -141,8 +352,8 @@ export default function DownloadPage() {
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-[color:var(--warning)]" />
             <p className="text-sm font-semibold text-foreground">
               The Android APK is still in final testing. Drop your email to be
-              notified when it's out \u2014 or just keep using the web app, it
-              has everything except the on-device email scanner.
+              notified when it&apos;s out \u2014 or just keep using the web app,
+              it has everything except the on-device email scanner.
             </p>
           </motion.div>
         )}
@@ -155,25 +366,25 @@ export default function DownloadPage() {
           className="space-y-4"
         >
           <h2 className="font-heading text-2xl font-black tracking-tight">
-            Why Android is better for scanning
+            Why install the app
           </h2>
           <div className="grid gap-3 md:grid-cols-3">
             <FeatureCard
               icon={<Cpu className="size-5" />}
-              title="On-device AI"
-              description="The Android app runs a small LiteRT language model locally. Your inbox never leaves your phone."
+              title="Two-tier scan engine"
+              description="A deterministic local parser handles 85% of receipts on-device. Only ambiguous ones escalate to a Llama-3.1-8B fallback over HTTPS."
               tone="lilac"
             />
             <FeatureCard
               icon={<Mail className="size-5" />}
               title="Smarter email triage"
-              description="Filters out refunds, newsletters, and one-off purchases automatically. Only real subscription charges get surfaced."
+              description="Filters out refunds, newsletters and one-off purchases. Only real recurring charges get surfaced \u2014 with full body context, not just metadata."
               tone="mint"
             />
             <FeatureCard
               icon={<ShieldCheck className="size-5" />}
               title="You stay in control"
-              description="Review every detected subscription before it's added. Nothing imports without your approval."
+              description="Review every detected subscription before it&apos;s added. Renewal reminders, push alerts, multi-currency totals \u2014 all opt-in."
               tone="sky"
             />
           </div>
@@ -204,10 +415,10 @@ export default function DownloadPage() {
           </div>
           <ul className="grid gap-2.5 md:grid-cols-2">
             {[
-              "On-device AI wherever possible \u2014 your emails don't hit our servers.",
-              "No random imports. You review each detected subscription first.",
-              "Only what you have proof of gets saved to your account.",
               "Read-only Gmail scope \u2014 Driped never sends or deletes email.",
+              "Local parser handles ~85% of emails. Only low-confidence ones hit the AI fallback.",
+              "AI fallback runs on Cloudflare Workers AI; no per-user audit log retained.",
+              "Nothing imports without your approval. Review every detection first.",
             ].map((line) => (
               <li
                 key={line}
@@ -220,23 +431,118 @@ export default function DownloadPage() {
           </ul>
         </motion.section>
 
-        {/* Install note */}
+        {/* Release timeline */}
         <motion.section
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
+          className="space-y-4"
+        >
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="font-heading text-2xl font-black tracking-tight">
+              Release timeline
+            </h2>
+            <a
+              href={RELEASES_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="brutal-btn inline-flex items-center gap-2 px-3 py-2 text-xs"
+              style={{ background: "var(--card)", color: "var(--foreground)" }}
+            >
+              <ExternalLink className="size-3.5" /> All releases
+            </a>
+          </div>
+          <p className="text-sm font-semibold text-foreground/70">
+            Two years of internal alpha &rarr; beta &rarr; RC builds shipped to
+            our test rig before <strong>v3.1.1</strong> went public on GitHub
+            Releases. Older builds are documented here but were never published.
+          </p>
+          <ol className="relative space-y-3 border-l-2 pl-5"
+            style={{ borderColor: "var(--neo-ink)" }}
+          >
+            {RELEASE_TIMELINE.slice().reverse().map((entry, idx) => {
+              const ch = CHANNEL_STYLES[entry.channel];
+              const isLatest = idx === 0;
+              return (
+                <li key={entry.version} className="relative">
+                  <span
+                    className="absolute -left-[1.78rem] top-2 size-3 rounded-full border-2"
+                    style={{
+                      background: isLatest ? "var(--neo-gold)" : "var(--card)",
+                      borderColor: "var(--neo-ink)",
+                    }}
+                  />
+                  <div
+                    className={`brutal-card-flat space-y-2 p-4 ${
+                      isLatest ? "border-2" : ""
+                    }`}
+                    style={
+                      isLatest
+                        ? {
+                            background: "var(--neo-gold-soft)",
+                            borderColor: "var(--neo-ink)",
+                          }
+                        : undefined
+                    }
+                  >
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="font-mono text-sm font-black">
+                        {entry.version}
+                      </span>
+                      <span className="text-xs font-bold text-foreground/60">
+                        \u2022 {entry.date}
+                      </span>
+                      <span
+                        className="brutal-badge text-[10px]"
+                        style={{ background: ch.bg, color: ch.fg }}
+                      >
+                        {ch.label}
+                      </span>
+                      {isLatest && (
+                        <span
+                          className="brutal-badge inline-flex items-center gap-1 text-[10px]"
+                          style={{
+                            background: "var(--neo-ink)",
+                            color: "var(--neo-cream)",
+                          }}
+                        >
+                          <Sparkles className="size-3" /> Latest
+                        </span>
+                      )}
+                    </div>
+                    <p className="font-heading text-sm font-black text-foreground">
+                      {entry.title}
+                    </p>
+                    <ul className="space-y-1 text-xs font-semibold text-foreground/75">
+                      {entry.notes.map((note) => (
+                        <li key={note} className="flex items-start gap-1.5">
+                          <span className="mt-1 size-1 shrink-0 rounded-full bg-current opacity-60" />
+                          <span>{note}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </motion.section>
+
+        {/* Install note */}
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.35 }}
           className="brutal-card-flat space-y-3 p-5"
         >
           <h3 className="font-heading text-sm font-black uppercase tracking-widest text-foreground/70">
             Install note
           </h3>
           <p className="text-sm font-semibold text-foreground/85">
-            Because Driped isn't on the Play Store yet, Android may ask you to
-            allow installs from your browser or file manager the first time.
-            This is safe \u2014 the APK is signed with our own release key.
-          </p>
-          <p className="text-xs font-semibold text-foreground/60">
-            Play Store release coming later.
+            Because Driped isn&apos;t on the Play Store yet, Android may ask
+            you to allow installs from your browser or file manager the first
+            time. This is safe \u2014 the APK is signed with our own release
+            key. Play Store release coming later.
           </p>
         </motion.section>
       </main>
@@ -257,9 +563,7 @@ function FeatureCard({
 }) {
   const bg = `var(--neo-${tone})`;
   return (
-    <div
-      className="brutal-card space-y-2 p-5"
-    >
+    <div className="brutal-card space-y-2 p-5">
       <span
         className="flex size-10 items-center justify-center rounded-xl border-2"
         style={{

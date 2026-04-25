@@ -259,7 +259,7 @@ function SubscriptionCard({
       transition={{ delay: index * 0.03 }}
     >
       <Link
-        href={`/subscriptions/${sub.id}`}
+        href={`/subscriptions/detail?id=${sub.id}`}
         className="brutal-card flex flex-col gap-3 p-4 transition-all hover:-translate-y-1"
         style={{ transition: "transform 0.15s, box-shadow 0.15s" }}
         onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "6px 6px 0px var(--foreground)"; }}
@@ -311,7 +311,7 @@ function SubscriptionRow({
       transition={{ delay: index * 0.02 }}
     >
       <Link
-        href={`/subscriptions/${sub.id}`}
+        href={`/subscriptions/detail?id=${sub.id}`}
         className="brutal-card-flat flex items-center gap-4 p-3 transition-all hover:-translate-y-0.5"
         style={{ transition: "transform 0.15s" }}
       >

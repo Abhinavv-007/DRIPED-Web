@@ -193,7 +193,7 @@ export default function SavingsPage() {
                     <p className="text-xs text-muted-foreground">/yr saving</p>
                   </div>
                   <Link
-                    href={`/subscriptions/${c.subscription_id}`}
+                    href={`/subscriptions/detail?id=${c.subscription_id}`}
                     className="p-1 text-muted-foreground"
                     onClick={(e) => e.stopPropagation()}
                   >
@@ -243,7 +243,7 @@ export default function SavingsPage() {
             {ghosts.map((g) => (
               <Link
                 key={g.subscription_id}
-                href={`/subscriptions/${g.subscription_id}`}
+                href={`/subscriptions/detail?id=${g.subscription_id}`}
                 className="brutal-card-flat flex items-center gap-3 p-3 transition-all hover:-translate-y-0.5"
               >
                 <ServiceAvatar
