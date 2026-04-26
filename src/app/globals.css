@@ -1,26 +1,605 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-heading);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.7);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.35);
+  --radius-2xl: calc(var(--radius) * 1.7);
+  --radius-3xl: calc(var(--radius) * 2);
+  --radius-4xl: calc(var(--radius) * 2.4);
+
+  /* Driped Neo brand tokens \u2014 mirror @driped/neo */
+  --color-neo-gold: var(--neo-gold);
+  --color-neo-gold-deep: var(--neo-gold-deep);
+  --color-neo-cream: var(--neo-cream);
+  --color-neo-mint: var(--neo-mint);
+  --color-neo-coral: var(--neo-coral);
+  --color-neo-sky: var(--neo-sky);
+  --color-neo-lilac: var(--neo-lilac);
+  --color-neo-lemon: var(--neo-lemon);
+
+  /* Semantic aliases kept for legacy components */
+  --color-gold: var(--neo-gold);
+  --color-gold-deep: var(--neo-gold-deep);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-info: var(--info);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Driped Neo — Light variant (warm cream, ink-on-cream) ── */
+:root {
+  --background: #FFF8F0;
+  --foreground: #1A1612;
+  --card: #FFFFFF;
+  --card-foreground: #1A1612;
+  --popover: #FFFFFF;
+  --popover-foreground: #1A1612;
+  --primary: #C4894B;
+  --primary-foreground: #FFF3D6;
+  --secondary: #FFF0DB;
+  --secondary-foreground: #1A1612;
+  --muted: #F5EDE3;
+  --muted-foreground: #7A6E63;
+  --accent: #FFF3D6;
+  --accent-foreground: #1A1612;
+  --destructive: #D93A3A;
+  --border: #1A1612;
+  --input: #1A1612;
+  --ring: #C4894B;
+  --radius: 0.75rem;
+
+  /* Neo tokens (light) */
+  --neo-bg: #FFF8F0;
+  --neo-surface: #FFFFFF;
+  --neo-surface-raised: #FFF0DB;
+  --neo-surface-sunken: #F5EDE3;
+  --neo-ink: #1A1612;
+  --neo-ink-mid: #4A4338;
+  --neo-ink-low: #7A6E63;
+  --neo-ink-ghost: #C8BFAC;
+  --neo-gold: #C4894B;
+  --neo-gold-deep: #A26F37;
+  --neo-gold-soft: #F5E7D3;
+  --neo-cream: #FFF3D6;
+  --neo-mint: #8FE3A7;
+  --neo-coral: #FF8F78;
+  --neo-sky: #6FBFFF;
+  --neo-lilac: #B89BFF;
+  --neo-lemon: #FFD060;
+
+  /* Shadows */
+  --brutal-shadow: 4px 4px 0px var(--neo-ink);
+  --brutal-shadow-sm: 2px 2px 0px var(--neo-ink);
+  --brutal-shadow-lg: 6px 6px 0px var(--neo-ink);
+  --brutal-shadow-hover: 6px 6px 0px var(--neo-ink);
+  --brutal-shadow-gold: 4px 4px 0px var(--neo-gold);
+  --brutal-border: 2px solid var(--neo-ink);
+
+  /* Logo containers \u2014 theme-aware. Light: pure white (3D paper look).
+     Dark: warm cream so white brand logos stay visible and the tile
+     doesn't blast pure white into your face. */
+  --logo-bg: #FFFFFF;
+  --logo-rim: color-mix(in srgb, var(--neo-ink) 12%, transparent);
+
+  /* Text hierarchy helpers \u2014 pair with surface tokens below */
+  --text-strong: var(--neo-ink);
+  --text-body: var(--neo-ink-mid);
+  --text-subtle: var(--neo-ink-low);
+
+  /* Semantics */
+  --success: #00A650;
+  --warning: #D9A100;
+  --danger: #D93A3A;
+  --info: #2B7ED9;
+  --gold: var(--neo-gold);
+  --gold-deep: var(--neo-gold-deep);
+  --purple: #9747FF;
+  --pink: #FF4081;
+  --teal: #1DE9B6;
+  --lime: #C6FF00;
+  --orange: #FF6D00;
+
+  /* Charts */
+  --chart-1: var(--neo-gold);
+  --chart-2: var(--neo-lilac);
+  --chart-3: var(--neo-mint);
+  --chart-4: var(--neo-sky);
+  --chart-5: var(--neo-coral);
+
+  /* Sidebar */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1A1612;
+  --sidebar-primary: var(--neo-gold);
+  --sidebar-primary-foreground: #1A1612;
+  --sidebar-accent: #FFF0DB;
+  --sidebar-accent-foreground: #1A1612;
+  --sidebar-border: #1A1612;
+  --sidebar-ring: var(--neo-gold);
+}
+
+/* ── Driped Neo — Dark variant (Playful Neo-Brutal + Dark) ── */
+.dark {
+  --background: #0E0B08;
+  --foreground: #F7F1E4;
+  --card: #1A1612;
+  --card-foreground: #F7F1E4;
+  --popover: #241E18;
+  --popover-foreground: #F7F1E4;
+  --primary: #E8B168;
+  --primary-foreground: #1A1612;
+  --secondary: #241E18;
+  --secondary-foreground: #F7F1E4;
+  --muted: #241E18;
+  --muted-foreground: #C8BFAC;
+  --accent: #3A2E1E;
+  --accent-foreground: #F7F1E4;
+  --destructive: #FF5B5B;
+  --border: #F7F1E4;
+  --input: #F7F1E4;
+  --ring: #E8B168;
+
+  /* Neo tokens (dark) */
+  --neo-bg: #0E0B08;
+  --neo-surface: #1A1612;
+  --neo-surface-raised: #241E18;
+  --neo-surface-sunken: #0A0705;
+  --neo-ink: #F7F1E4;
+  --neo-ink-mid: #C8BFAC;
+  --neo-ink-low: #8C836F;
+  --neo-ink-ghost: #4A4338;
+  --neo-gold: #E8B168;
+  --neo-gold-deep: #C4894B;
+  --neo-gold-soft: #3A2E1E;
+  --neo-cream: #FFF3D6;
+  --neo-mint: #B8F0C9;
+  --neo-coral: #FFAE9B;
+  --neo-sky: #9BD4FF;
+  --neo-lilac: #D9BBFF;
+  --neo-lemon: #FFE58A;
+
+  /* Shadows \u2014 cream on dark */
+  --brutal-shadow: 4px 4px 0px var(--neo-ink);
+  --brutal-shadow-sm: 2px 2px 0px var(--neo-ink);
+  --brutal-shadow-lg: 6px 6px 0px var(--neo-ink);
+  --brutal-shadow-hover: 6px 6px 0px var(--neo-gold);
+  --brutal-shadow-gold: 4px 4px 0px var(--neo-gold);
+  --brutal-border: 2px solid var(--neo-ink);
+
+  /* Logo containers \u2014 warm cream in dark so brand colours still pop */
+  --logo-bg: #F7F1E4;
+  --logo-rim: color-mix(in srgb, var(--neo-gold) 35%, transparent);
+
+  /* Text hierarchy \u2014 bright cream primary, softened for body */
+  --text-strong: var(--neo-ink);
+  --text-body: var(--neo-ink-mid);
+  --text-subtle: var(--neo-ink-low);
+
+  /* Semantics */
+  --success: #34D97A;
+  --warning: #FFC53B;
+  --danger: #FF5B5B;
+  --info: #5BAEFF;
+  --gold: var(--neo-gold);
+  --gold-deep: var(--neo-gold-deep);
+  --purple: var(--neo-lilac);
+  --pink: #FF6AAD;
+  --teal: var(--neo-mint);
+  --lime: #D6F56A;
+  --orange: #FFB366;
+
+  /* Charts \u2014 neo pastels that pop on near-black */
+  --chart-1: var(--neo-gold);
+  --chart-2: var(--neo-lilac);
+  --chart-3: var(--neo-mint);
+  --chart-4: var(--neo-sky);
+  --chart-5: var(--neo-coral);
+
+  /* Sidebar */
+  --sidebar: #1A1612;
+  --sidebar-foreground: #F7F1E4;
+  --sidebar-primary: var(--neo-gold);
+  --sidebar-primary-foreground: #1A1612;
+  --sidebar-accent: #241E18;
+  --sidebar-accent-foreground: #F7F1E4;
+  --sidebar-border: #4A4338;
+  --sidebar-ring: var(--neo-gold);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans scroll-smooth;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Driped Neo component classes ── */
+@layer components {
+  /* Card variants */
+  .brutal-card {
+    @apply rounded-xl bg-card border-2 transition-all duration-150;
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow);
+  }
+  .brutal-card:hover {
+    box-shadow: var(--brutal-shadow-hover);
+    transform: translate(-1px, -1px);
+  }
+  .brutal-card-flat {
+    @apply rounded-xl bg-card border-2;
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow-sm);
+  }
+  .brutal-card-raised {
+    @apply rounded-xl border-2 transition-all duration-150;
+    background: var(--neo-surface-raised);
+    color: var(--neo-ink);
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow);
+  }
+  .brutal-card-raised:hover {
+    box-shadow: var(--brutal-shadow-lg);
+    transform: translate(-2px, -2px);
+  }
+  .brutal-card-accent {
+    @apply rounded-xl border-2 transition-all duration-150;
+    background: var(--neo-gold);
+    color: var(--primary-foreground);
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow);
+  }
+  .brutal-card-accent:hover {
+    box-shadow: var(--brutal-shadow-lg);
+    transform: translate(-2px, -2px);
+  }
+  .brutal-card-danger {
+    @apply rounded-xl border-2;
+    background: color-mix(in srgb, var(--danger) 22%, var(--card));
+    color: var(--foreground);
+    border-color: var(--neo-ink);
+    box-shadow: 4px 4px 0 var(--danger);
+  }
+
+  /* Stat tile \u2014 pastel-accented hero card for KPIs */
+  .brutal-stat {
+    @apply rounded-xl border-2 p-4 transition-all duration-150;
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow);
+  }
+  .brutal-stat:hover {
+    box-shadow: var(--brutal-shadow-lg);
+    transform: translate(-2px, -2px);
+  }
+  .brutal-stat--mint  { background: var(--neo-mint);  color: var(--neo-ink); }
+  .brutal-stat--coral { background: var(--neo-coral); color: var(--neo-ink); }
+  .brutal-stat--sky   { background: var(--neo-sky);   color: var(--neo-ink); }
+  .brutal-stat--lilac { background: var(--neo-lilac); color: var(--neo-ink); }
+  .brutal-stat--lemon { background: var(--neo-lemon); color: var(--neo-ink); }
+  .brutal-stat--gold  { background: var(--neo-gold);  color: var(--primary-foreground); }
+
+  /* Buttons */
+  .brutal-btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 px-4 py-2 font-bold transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px];
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow-sm);
+    font-family: var(--font-heading);
+  }
+  .brutal-btn:hover {
+    box-shadow: var(--brutal-shadow);
+    transform: translate(-1px, -1px);
+  }
+  .brutal-btn:active { box-shadow: none; }
+
+  .brutal-btn--primary {
+    background: var(--neo-gold);
+    color: var(--primary-foreground);
+    box-shadow: var(--brutal-shadow);
+  }
+  .brutal-btn--primary:hover { box-shadow: var(--brutal-shadow-lg); }
+
+  .brutal-btn--ghost {
+    background: transparent;
+    box-shadow: none;
+  }
+  .brutal-btn--ghost:hover {
+    background: var(--neo-surface-raised);
+    box-shadow: var(--brutal-shadow-sm);
+  }
+
+  .brutal-btn--danger {
+    background: var(--neo-coral);
+    color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow);
+  }
+
+  /* Inputs */
+  .brutal-input {
+    @apply rounded-lg border-2 bg-background px-3 py-2 text-sm font-medium transition-all outline-none;
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow-sm);
+  }
+  .brutal-input:focus {
+    box-shadow: var(--brutal-shadow-gold);
+  }
+
+  /* Badge + pill */
+  .brutal-badge {
+    @apply inline-flex items-center rounded-md border-2 px-2.5 py-1 text-[11px] font-black uppercase tracking-widest;
+    border-color: var(--neo-ink);
+    background: var(--neo-surface-raised);
+    box-shadow: var(--brutal-shadow-sm);
+    font-family: var(--font-heading);
+  }
+  .brutal-pill {
+    @apply inline-flex items-center rounded-full border-2 px-3 py-1 text-xs font-bold;
+    border-color: var(--neo-ink);
+    background: var(--neo-surface);
+  }
+
+  /* Surface helpers \u2014 sections that aren't cards but need visual lift */
+  .brutal-surface {
+    background: var(--neo-surface);
+    border: 2px solid var(--neo-ink);
+    border-radius: 16px;
+  }
+  .brutal-surface-inset {
+    background: var(--neo-surface-sunken);
+    border: 2px solid var(--neo-ink-ghost);
+    border-radius: 12px;
+    box-shadow: inset 2px 2px 0 var(--neo-ink-ghost);
+  }
+
+  /* Legacy compat \u2014 keep old class names alive, map to new look */
+  .glass-card {
+    @apply rounded-xl bg-card border-2 transition-all duration-150;
+    border-color: var(--neo-ink);
+    box-shadow: var(--brutal-shadow-sm);
+  }
+  .glass-card:hover {
+    box-shadow: var(--brutal-shadow);
+    transform: translate(-1px, -1px);
+  }
+  .glass-card-emphasised {
+    @apply rounded-xl border-2 bg-card transition-all duration-150;
+    border-color: var(--neo-gold);
+    box-shadow: var(--brutal-shadow-gold);
+  }
+}
+
+/* ───── Custom Animations ───── */
+@keyframes drip {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.8; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes skeleton-shimmer {
+  0% { transform: translateX(-110%); }
+  100% { transform: translateX(110%); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes bounce-in {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--primary); }
+  50% { box-shadow: 0 0 0 8px rgba(0,0,0,0); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes confetti-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes scale-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-drip { animation: drip 2s ease-in-out infinite; }
+.animate-wiggle { animation: wiggle 0.6s ease-in-out; }
+.animate-wiggle-slow { animation: wiggle 2s ease-in-out infinite; }
+.animate-pop { animation: pop 0.3s ease-out; }
+.animate-shake { animation: shake 0.4s ease-in-out; }
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-bounce-in { animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.animate-glow-pulse { animation: glow-pulse 2s ease-out infinite; }
+.animate-scale-pulse { animation: scale-pulse 2s ease-in-out infinite; }
+.animate-marquee { animation: marquee 30s linear infinite; }
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s linear infinite;
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--muted) 88%, var(--foreground) 12%);
+}
+.skeleton-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-110%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--background) 70%, transparent) 48%,
+    color-mix(in srgb, var(--primary) 24%, transparent) 52%,
+    transparent 100%
+  );
+  animation: skeleton-shimmer 1.45s ease-in-out infinite;
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--primary), var(--warning), var(--primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease-in-out infinite;
+}
+
+/* Tilt effect for stat cards */
+.tilt-card {
+  transition: transform 0.2s ease-out;
+  transform-style: preserve-3d;
+}
+.tilt-card:hover {
+  transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-4px);
+}
+
+/* Kbd styling */
+.kbd {
+  @apply inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded border-2 border-foreground/60 bg-muted font-mono text-[10px] font-bold;
+  box-shadow: 1px 1px 0px var(--foreground);
+}
+
+/* Triangle shape for confetti */
+.triangle-shape {
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+  border-left: 8px solid transparent !important;
+  border-right: 8px solid transparent !important;
+  border-bottom: 14px solid currentColor !important;
+  border-top: none !important;
+}
+
+/* Sonner toast neo-brutalism override */
+[data-sonner-toaster] [data-sonner-toast] {
+  border: 2px solid var(--foreground) !important;
+  border-radius: 10px !important;
+  box-shadow: 4px 4px 0px var(--foreground) !important;
+  font-weight: 700 !important;
+  min-height: 48px !important;
+  color: var(--foreground) !important;
+}
+[data-sonner-toaster] [data-sonner-toast] [data-icon] {
+  color: currentColor !important;
+}
+[data-sonner-toaster] [data-sonner-toast][data-type="success"] {
+  background: #D0FFE0 !important;
+  color: #006B2B !important;
+}
+[data-sonner-toaster] [data-sonner-toast][data-type="error"] {
+  background: #FFE0E0 !important;
+  color: #8B0000 !important;
+}
+[data-sonner-toaster] [data-sonner-toast][data-type="warning"] {
+  background: #FFF3D0 !important;
+  color: #7A5C00 !important;
+}
+[data-sonner-toaster] [data-sonner-toast][data-type="info"] {
+  background: #D0E8FF !important;
+  color: #003D80 !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border: 2px solid var(--background);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
 }

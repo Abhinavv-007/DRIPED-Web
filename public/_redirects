@@ -1,0 +1,8 @@
+# Cloudflare Pages redirect rules.
+# Backward-compat for the old `/subscriptions/[id]` and `/payments/[id]`
+# dynamic routes \u2014 we now ship as a static export so these were
+# refactored to `/{section}/detail?id=...`. The 200 status code makes
+# this a server-side rewrite (URL stays as user typed).
+
+/subscriptions/:id  /subscriptions/detail?id=:id  200
+/payments/:id       /payments/detail?id=:id       200
