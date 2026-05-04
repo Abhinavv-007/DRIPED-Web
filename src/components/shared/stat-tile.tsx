@@ -58,7 +58,7 @@ export function StatTile({
           deltaDirection === "down" && "text-[color:var(--danger)]",
           deltaDirection === "flat" && "opacity-70",
         )}>
-          {deltaDirection === "up" ? "\u2191 " : deltaDirection === "down" ? "\u2193 " : ""}
+          {deltaDirection === "up" ? "↑ " : deltaDirection === "down" ? "↓ " : ""}
           {delta}
         </p>
       )}

@@ -57,7 +57,7 @@ export function ReceiptLocker({ subscriptionId }: { subscriptionId: string }) {
                   {r.subject || "(no subject)"}
                 </p>
                 <p className="truncate text-xs text-muted-foreground">
-                  {r.sender ?? "\u2014"}
+                  {r.sender ?? "—"}
                 </p>
                 {r.snippet && (
                   <p className="mt-1 line-clamp-2 text-xs text-muted-foreground/80">

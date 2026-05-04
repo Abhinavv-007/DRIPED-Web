@@ -1,5 +1,5 @@
 /**
- * @driped/scan \u2014 shared subscription scan engine.
+ * @driped/scan — shared subscription scan engine.
  *
  * Public API surface. Everything else is internal.
  */

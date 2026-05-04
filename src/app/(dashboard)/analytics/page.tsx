@@ -100,7 +100,7 @@ export default function AnalyticsPage() {
     [activeSubs, currency]
   );
 
-  // Spending trend \u2014 uses the real `/insights/forecast` data instead of
+  // Spending trend — uses the real `/insights/forecast` data instead of
   // synthetic sine-wave numbers. Falls back to a flat line at monthlyTotal
   // until forecast arrives so the chart still renders.
   const rangeMonths = range === "3m" ? 3 : range === "6m" ? 6 : 12;

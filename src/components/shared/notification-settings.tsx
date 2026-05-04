@@ -17,7 +17,7 @@ import { usePush } from "@/lib/hooks/use-push";
  *
  * States handled explicitly: unsupported, default (not requested yet),
  * requesting/loading, granted+subscribed, granted-but-not-subscribed
- * (rare \u2014 e.g. server rejected), denied, error.
+ * (rare — e.g. server rejected), denied, error.
  */
 export function NotificationSettings() {
   const { state, enable, disable } = usePush();
@@ -37,7 +37,7 @@ export function NotificationSettings() {
       : state.permission === "denied"
         ? "Blocked"
         : state.loading
-          ? "Enabling\u2026"
+          ? "Enabling…"
           : "Not enabled";
 
   return (
@@ -67,7 +67,7 @@ export function NotificationSettings() {
             </span>
           </div>
           <p className="mt-1 text-sm text-foreground/70">
-            Get pinged 7, 3, and 1 day before renewals \u2014 plus a monthly summary on the 1st.
+            Get pinged 7, 3, and 1 day before renewals — plus a monthly summary on the 1st.
           </p>
         </div>
       </div>
@@ -76,7 +76,7 @@ export function NotificationSettings() {
         <div className="brutal-card-flat flex items-start gap-2 p-3 text-sm text-foreground">
           <AlertCircle className="mt-0.5 size-4 shrink-0 text-[color:var(--warning)]" />
           <span>
-            This browser doesn\u2019t support Web Push. Try Chrome, Firefox, or Safari 16+.
+            This browser doesn&apos;t support Web Push. Try Chrome, Firefox, or Safari 16+.
           </span>
         </div>
       )}
@@ -114,15 +114,15 @@ export function NotificationSettings() {
               </p>
               <ol className="list-decimal space-y-1 pl-5 text-xs text-foreground/70">
                 <li>Click the lock icon in your address bar.</li>
-                <li>Find \u201CNotifications\u201D and switch to Allow.</li>
-                <li>Reload this page and hit \u201CEnable\u201D again.</li>
+                <li>Find &ldquo;Notifications&rdquo; and switch to Allow.</li>
+                <li>Reload this page and hit &ldquo;Enable&rdquo; again.</li>
               </ol>
             </div>
           ) : state.error ? (
             <Button className="rounded-xl" onClick={enable} disabled={state.loading}>
               {state.loading ? (
                 <>
-                  <Loader2 className="mr-2 size-4 animate-spin" /> Retrying\u2026
+                  <Loader2 className="mr-2 size-4 animate-spin" /> Retrying…
                 </>
               ) : (
                 <>
@@ -134,7 +134,7 @@ export function NotificationSettings() {
             <Button className="rounded-xl" onClick={enable} disabled={state.loading}>
               {state.loading ? (
                 <>
-                  <Loader2 className="mr-2 size-4 animate-spin" /> Enabling\u2026
+                  <Loader2 className="mr-2 size-4 animate-spin" /> Enabling…
                 </>
               ) : (
                 <>

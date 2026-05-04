@@ -119,10 +119,15 @@ export function AddSubscriptionModal({ open, onOpenChange, onSuccess }: Props) {
       return;
     }
     const slug = form.service_slug || form.service_name.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "");
+    const amount = parseFloat(form.amount);
+    if (!Number.isFinite(amount) || amount <= 0) {
+      toast.error("Enter a valid amount greater than zero");
+      return;
+    }
     const body: SubscriptionCreateBody = {
       service_name: form.service_name.trim(),
       service_slug: slug,
-      amount: parseFloat(form.amount),
+      amount,
       billing_cycle: form.billing_cycle,
       // Use the form's per-subscription currency, NOT the global preference,
       // so a user typing in INR while their dashboard is set to USD doesn't
@@ -132,6 +137,7 @@ export function AddSubscriptionModal({ open, onOpenChange, onSuccess }: Props) {
       start_date: form.start_date || undefined,
       next_renewal_date: form.next_renewal_date || undefined,
       source: "manual",
+      // Boolean here gets coerced to 0|1 inside `api.post()` for D1 storage.
       is_trial: form.status === "trial",
     };
     try {
@@ -154,7 +160,16 @@ export function AddSubscriptionModal({ open, onOpenChange, onSuccess }: Props) {
 
   return (
     <Dialog open={open} onOpenChange={(v) => { onOpenChange(v); if (!v) resetAll(); }}>
-      <DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-xl border-2 border-foreground/80" style={{ boxShadow: "6px 6px 0px var(--foreground)" }}>
+      {/*
+        Width is clamped to (viewport - 1rem) so the modal can never push past
+        the viewport on mobile, regardless of any nested grid widths. The
+        modal scrolls vertically only — `overflow-x: hidden` on the body kills
+        any stray horizontal scroll caused by motion's translateX animations.
+      */}
+      <DialogContent
+        className="w-[calc(100vw-1rem)] max-h-[90vh] overflow-x-hidden overflow-y-auto sm:max-w-xl border-2 border-foreground/80"
+        style={{ boxShadow: "6px 6px 0px var(--foreground)" }}
+      >
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl font-black">
             {step === "form" && (
@@ -181,8 +196,9 @@ export function AddSubscriptionModal({ open, onOpenChange, onSuccess }: Props) {
                 />
               </div>
 
-              {/* Category pills */}
-              <div className="mb-3 flex gap-1.5 overflow-x-auto pb-1">
+              {/* Category pills — wrap onto multiple lines instead of
+                  scrolling horizontally so nothing goes off-screen on mobile. */}
+              <div className="mb-3 flex flex-wrap gap-1.5">
                 <button
                   onClick={() => setCatFilter("all")}
                   className={`brutal-pill whitespace-nowrap text-[10px] ${catFilter === "all" ? "bg-primary text-primary-foreground" : "bg-card"}`}
@@ -201,19 +217,22 @@ export function AddSubscriptionModal({ open, onOpenChange, onSuccess }: Props) {
                 ))}
               </div>
 
-              {/* Service grid */}
+              {/* Service grid — every tile uses the same fixed-size logo
+                  container so square + circular brand logos look uniform. */}
               <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
                 {filteredServices.map((svc, i) => (
                   <motion.button
                     key={svc.slug}
-                    initial={{ opacity: 0, scale: 0.9 }}
+                    initial={{ opacity: 0, scale: 0.92 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: staggerDelay(i) }}
                     onClick={() => selectService(svc)}
-                    className="brutal-card-flat flex flex-col items-center gap-2 p-3 hover:bg-secondary/80 transition-colors cursor-pointer"
+                    className="brutal-card-flat flex min-w-0 flex-col items-center gap-2 overflow-hidden p-3 text-center transition-colors hover:bg-secondary/80 cursor-pointer"
                   >
-                    <ServiceAvatar serviceSlug={svc.slug} serviceName={svc.name} size={36} />
-                    <span className="text-[11px] font-bold leading-tight text-center truncate w-full">{svc.name}</span>
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center">
+                      <ServiceAvatar serviceSlug={svc.slug} serviceName={svc.name} size={44} />
+                    </span>
+                    <span className="w-full truncate text-[11px] font-bold leading-tight">{svc.name}</span>
                   </motion.button>
                 ))}
               </div>

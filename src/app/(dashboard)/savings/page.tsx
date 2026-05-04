@@ -120,7 +120,7 @@ export default function SavingsPage() {
         />
       </div>
 
-      {/* Cancel candidates \u2014 selectable */}
+      {/* Cancel candidates — selectable */}
       <section className="brutal-card space-y-3 p-5">
         <div className="flex items-center justify-between">
           <h2 className="font-heading text-[10px] font-black uppercase tracking-widest text-muted-foreground">
@@ -129,13 +129,13 @@ export default function SavingsPage() {
           {selected.size > 0 && (
             <div className="flex items-center gap-3 text-sm">
               <span className="font-semibold">
-                {selected.size} selected \u2014 save{" "}
+                {selected.size} selected — save{" "}
                 <span className="tabular-nums">
                   {CurrencyUtil.formatAmount(totalSelectedSaving, currency, { compact: true })}/yr
                 </span>
               </span>
               <Button onClick={runSim} disabled={simulating} className="rounded-xl">
-                {simulating ? "Simulating\u2026" : "Simulate"}
+                {simulating ? "Simulating…" : "Simulate"}
               </Button>
             </div>
           )}
@@ -144,7 +144,7 @@ export default function SavingsPage() {
           <IllustratedEmptyState
             icon={Sparkles}
             title="No cuts suggested"
-            description="You're running a tight ship \u2014 nothing obvious to cancel right now."
+            description="You're running a tight ship — nothing obvious to cancel right now."
             tone="green"
             className="border-none shadow-none"
           />
@@ -217,14 +217,14 @@ export default function SavingsPage() {
             What-if
           </p>
           <h3 className="mt-1 text-xl font-black tracking-tight">
-            Cancel {whatIf.cancelled_count} \u2192 keep{" "}
+            Cancel {whatIf.cancelled_count} → keep{" "}
             <span className="tabular-nums">
               {CurrencyUtil.formatAmount(whatIf.saving.yearly, currency, { compact: true })}/yr
             </span>
           </h3>
           <p className="text-sm opacity-80">
             From {CurrencyUtil.formatAmount(whatIf.baseline.yearly, currency, { compact: true })}/yr
-            \u2192 {CurrencyUtil.formatAmount(whatIf.projected.yearly, currency, { compact: true })}/yr
+            → {CurrencyUtil.formatAmount(whatIf.projected.yearly, currency, { compact: true })}/yr
           </p>
         </motion.section>
       )}
