@@ -311,7 +311,7 @@ export default function DownloadPage() {
             </h1>
             <p className="mt-3 text-base font-semibold text-foreground/80 md:text-lg">
               Manage, detect and forecast every recurring charge in your inbox
-              \u2014 with a scan engine that&apos;s identical to the web app.
+              — with a scan engine that&apos;s identical to the web app.
             </p>
           </div>
         </motion.section>
@@ -328,11 +328,11 @@ export default function DownloadPage() {
               Latest Release
             </p>
             <p className="mt-1 text-xl font-black text-foreground">
-              Driped {APK_VERSION} \u2022 Android 8.0+
+              Driped {APK_VERSION} • Android 8.0+
             </p>
             <p className="mt-2 max-w-lg text-sm font-semibold text-foreground/75">
-              Signed APK, ~80\u202fMB. Sign in with the same Google account you
-              use on the web \u2014 your subscriptions sync instantly.
+              Signed APK, ~80 MB. Sign in with the same Google account you
+              use on the web — your subscriptions sync instantly.
             </p>
           </div>
           <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row">
@@ -379,7 +379,7 @@ export default function DownloadPage() {
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-[color:var(--warning)]" />
             <p className="text-sm font-semibold text-foreground">
               The Android APK is still in final testing. Drop your email to be
-              notified when it&apos;s out \u2014 or just keep using the web app,
+              notified when it&apos;s out — or just keep using the web app,
               it has everything except the on-device email scanner.
             </p>
           </motion.div>
@@ -405,13 +405,13 @@ export default function DownloadPage() {
             <FeatureCard
               icon={<Mail className="size-5" />}
               title="Smarter email triage"
-              description="Filters out refunds, newsletters and one-off purchases. Only real recurring charges get surfaced \u2014 with full body context, not just metadata."
+              description="Filters out refunds, newsletters and one-off purchases. Only real recurring charges get surfaced — with full body context, not just metadata."
               tone="mint"
             />
             <FeatureCard
               icon={<ShieldCheck className="size-5" />}
               title="You stay in control"
-              description="Review every detected subscription before it&apos;s added. Renewal reminders, push alerts, multi-currency totals \u2014 all opt-in."
+              description="Review every detected subscription before it&apos;s added. Renewal reminders, push alerts, multi-currency totals — all opt-in."
               tone="sky"
             />
           </div>
@@ -442,7 +442,7 @@ export default function DownloadPage() {
           </div>
           <ul className="grid gap-2.5 md:grid-cols-2">
             {[
-              "Read-only Gmail scope \u2014 Driped never sends or deletes email.",
+              "Read-only Gmail scope — Driped never sends or deletes email.",
               "Local parser handles ~85% of emails. Only low-confidence ones hit the AI fallback.",
               "AI fallback runs on Cloudflare Workers AI; no per-user audit log retained.",
               "Nothing imports without your approval. Review every detection first.",
@@ -520,7 +520,7 @@ export default function DownloadPage() {
                         {entry.version}
                       </span>
                       <span className="text-xs font-bold text-foreground/60">
-                        \u2022 {entry.date}
+                        • {entry.date}
                       </span>
                       <span
                         className="brutal-badge text-[10px]"
@@ -571,7 +571,7 @@ export default function DownloadPage() {
           <p className="text-sm font-semibold text-foreground/85">
             Because Driped isn&apos;t on the Play Store yet, Android may ask
             you to allow installs from your browser or file manager the first
-            time. This is safe \u2014 the APK is signed with our own release
+            time. This is safe — the APK is signed with our own release
             key. Play Store release coming later.
           </p>
         </motion.section>

@@ -16,7 +16,7 @@ interface ServiceAvatarProps {
  * ServiceAvatar renders a brand logo tile that works in both light and dark
  * modes. It is theme-aware via `--logo-bg` (white in light, cream in dark)
  * and adds a soft rim-light in dark mode so white-on-white doesn't vanish.
- * Never shows a "ghost" placeholder \u2014 falls back to coloured initials.
+ * Never shows a "ghost" placeholder — falls back to coloured initials.
  */
 export function ServiceAvatar({
   serviceSlug,

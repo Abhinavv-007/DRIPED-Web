@@ -106,7 +106,7 @@ export default function ForecastPage() {
         />
         <StatTile
           label="Peak Month"
-          value={peakMonth ? `${CurrencyUtil.formatAmount(peakMonth.total, currency, { compact: true })}` : "\u2014"}
+          value={peakMonth ? `${CurrencyUtil.formatAmount(peakMonth.total, currency, { compact: true })}` : "—"}
           delta={peakMonth ? labelFor(peakMonth.month) : undefined}
           icon={<Sparkles className="h-5 w-5" />}
           tone="coral"
@@ -190,7 +190,7 @@ export default function ForecastPage() {
               <div
                 key={d.date}
                 title={d.total > 0
-                  ? `${d.date} \u2022 ${d.count} charge${d.count === 1 ? "" : "s"} \u2022 ${CurrencyUtil.formatAmount(d.total, currency, { compact: true })}`
+                  ? `${d.date} • ${d.count} charge${d.count === 1 ? "" : "s"} • ${CurrencyUtil.formatAmount(d.total, currency, { compact: true })}`
                   : d.date}
                 className="aspect-square rounded-md border-2"
                 style={{

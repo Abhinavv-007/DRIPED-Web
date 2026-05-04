@@ -5,10 +5,10 @@ import { ALIAS_LOOKUP, DOMAIN_LOOKUP, merchantBySlug } from './merchants';
  * Multi-signal merchant matcher. Highest-confidence wins.
  *
  * Signals:
- *   1. Exact sender domain match \u2192 95
- *   2. DKIM / header domain match \u2192 90
- *   3. Subject alias match \u2192 75
- *   4. Body alias match \u2192 60
+ *   1. Exact sender domain match → 95
+ *   2. DKIM / header domain match → 90
+ *   3. Subject alias match → 75
+ *   4. Body alias match → 60
  */
 
 export function matchMerchant(input: {
@@ -42,7 +42,7 @@ export function matchMerchant(input: {
 
   // 3. Subject alias (stronger because receipt subjects mention the merchant).
   //    Collect ALL matching aliases then pick the one with the longest
-  //    display name \u2014 "Amazon Prime" beats "amazon" beats "kindle".
+  //    display name — "Amazon Prime" beats "amazon" beats "kindle".
   if (input.subject) {
     const subj = input.subject.toLowerCase();
     const hits = ALIAS_LOOKUP.filter((e) => e.regex.test(subj));
@@ -52,7 +52,7 @@ export function matchMerchant(input: {
     }
   }
 
-  // 4. Body keyword \u2014 same longest-match strategy.
+  // 4. Body keyword — same longest-match strategy.
   if (candidates.length === 0 && input.body) {
     const body = input.body.slice(0, 1500).toLowerCase();
     const hits = ALIAS_LOOKUP.filter((e) => e.regex.test(body));
@@ -67,7 +67,7 @@ export function matchMerchant(input: {
   return candidates[0];
 }
 
-/** Pick the alias with the longest display name \u2014 most specific match. */
+/** Pick the alias with the longest display name — most specific match. */
 function pickLongestAlias(
   hits: Array<{ regex: RegExp; slug: string; name: string }>,
 ): { slug: string; name: string } | null {
@@ -79,7 +79,7 @@ function pickLongestAlias(
   return { slug: best.slug, name: best.name };
 }
 
-/** Exact, then suffix match. `mail.netflix.com` \u2192 `netflix.com`. May return multiple. */
+/** Exact, then suffix match. `mail.netflix.com` → `netflix.com`. May return multiple. */
 function lookupDomain(domain: string): string[] {
   const d = domain.toLowerCase();
   if (DOMAIN_LOOKUP[d]) return DOMAIN_LOOKUP[d];

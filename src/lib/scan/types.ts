@@ -1,5 +1,5 @@
 /**
- * Shared scan-engine types \u2014 used by web, worker, and Dart port (mirrored).
+ * Shared scan-engine types — used by web, worker, and Dart port (mirrored).
  */
 
 export type BillingCycle = 'weekly' | 'monthly' | 'quarterly' | 'yearly' | 'lifetime';

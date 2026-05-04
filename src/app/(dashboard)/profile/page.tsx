@@ -39,6 +39,7 @@ import { toast } from "sonner";
 import { GmailScanCard } from "@/components/dashboard/gmail-scan-card";
 import { NotificationSettings } from "@/components/shared/notification-settings";
 import { StatTile } from "@/components/shared/stat-tile";
+import { APP_VERSION_LABEL } from "@/lib/constants/app-version";
 
 const fadeUp = {
   initial: { opacity: 0, y: 12 },
@@ -354,17 +355,27 @@ export default function ProfilePage() {
         {...fadeUp}
         transition={{ delay: 0.28 }}
       >
+        {/*
+          Sign-out is destructive but routine — we want it to feel intentional,
+          not alarming. We swap the candy-coral fill for a muted card surface
+          with a coral icon + cream-tinted border so the action reads as
+          "caution" instead of "emergency". The thick white outline is gone.
+        */}
         <button
-          className="brutal-btn flex w-full items-center justify-center gap-2 px-4 py-3 text-sm"
-          style={{ background: "var(--neo-coral)", color: "var(--neo-ink)" }}
+          className="brutal-btn flex w-full items-center justify-center gap-2 px-4 py-3 text-sm font-black"
+          style={{
+            background: "var(--card)",
+            color: "var(--neo-coral)",
+            borderColor: "color-mix(in srgb, var(--neo-coral) 60%, var(--neo-ink))",
+          }}
           onClick={handleSignOut}
         >
           <LogOut className="h-4 w-4" /> Sign Out
         </button>
       </motion.div>
 
-      <p className="text-center text-xs font-bold text-muted-foreground/50">
-        Driped v3.2.1
+      <p className="text-center text-xs font-bold text-muted-foreground/60">
+        {APP_VERSION_LABEL}
       </p>
     </div>
   );

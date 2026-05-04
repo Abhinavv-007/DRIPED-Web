@@ -63,7 +63,7 @@ export function GmailScanCard() {
 
   return (
     <div className="brutal-card overflow-hidden p-0">
-      {/* Header strip \u2014 uses the accent palette but all copy lives on the card */}
+      {/* Header strip — uses the accent palette but all copy lives on the card */}
       <div
         className="flex items-center gap-3 border-b-2 p-5"
         style={{ borderColor: "var(--neo-ink)", background: "var(--neo-gold-soft)" }}

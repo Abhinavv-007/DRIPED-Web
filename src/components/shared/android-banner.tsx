@@ -57,7 +57,7 @@ export function AndroidBanner() {
                 Android app available
               </p>
               <p className="text-xs font-semibold text-foreground/75">
-                Smarter on-device subscription scanning \u2014 no server roundtrip.
+                Smarter on-device subscription scanning — no server roundtrip.
               </p>
             </div>
             <Link

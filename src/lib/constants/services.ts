@@ -14,7 +14,7 @@ const brandIcon = (fileName: string) => `/brand-icons/${fileName}`;
 export const POPULAR_SERVICES: ServiceInfo[] = [
   // ── Streaming ──
   { slug: "netflix", name: "Netflix", logo: "https://cdn.simpleicons.org/netflix/E50914", color: "#E50914", category: "entertainment", defaultAmount: 199, defaultCurrency: "INR", defaultCycle: "monthly" },
-  { slug: "amazon_prime", name: "Amazon Prime", logo: "https://cdn.simpleicons.org/amazonprime/00A8E1", color: "#00A8E1", category: "entertainment", defaultAmount: 1499, defaultCurrency: "INR", defaultCycle: "yearly" },
+  { slug: "amazon_prime", name: "Prime Video", logo: "https://cdn.simpleicons.org/amazonprime/00A8E1", color: "#00A8E1", category: "entertainment", defaultAmount: 1499, defaultCurrency: "INR", defaultCycle: "yearly" },
   { slug: "disney_hotstar", name: "Disney+ Hotstar", logo: "https://cdn.simpleicons.org/hotstar/1F80E0", color: "#1F80E0", category: "entertainment", defaultAmount: 299, defaultCurrency: "INR", defaultCycle: "monthly" },
   { slug: "youtube_premium", name: "YouTube Premium", logo: "https://cdn.simpleicons.org/youtube/FF0000", color: "#FF0000", category: "entertainment", defaultAmount: 149, defaultCurrency: "INR", defaultCycle: "monthly" },
   { slug: "apple_tv", name: "Apple TV+", logo: "https://cdn.simpleicons.org/appletv/000000", color: "#000000", category: "entertainment", defaultAmount: 99, defaultCurrency: "INR", defaultCycle: "monthly" },
@@ -22,11 +22,20 @@ export const POPULAR_SERVICES: ServiceInfo[] = [
   { slug: "max", name: "Max", logo: "https://cdn.simpleicons.org/hbo/000000", color: "#B535F6", category: "entertainment", defaultAmount: 15.99, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "crunchyroll", name: "Crunchyroll", logo: "https://cdn.simpleicons.org/crunchyroll/F47521", color: "#F47521", category: "entertainment", defaultAmount: 7.99, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "jiohotstar", name: "JioHotstar", logo: "https://cdn.simpleicons.org/hotstar/1F80E0", color: "#0A3D91", category: "entertainment", defaultAmount: 999, defaultCurrency: "INR", defaultCycle: "yearly" },
+  { slug: "sonyliv", name: "SonyLIV", logo: "https://cdn.simpleicons.org/sonyliv/F09A2D", color: "#F09A2D", category: "entertainment", defaultAmount: 299, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "zee5", name: "Zee5", logo: "https://cdn.simpleicons.org/zee5/8230C8", color: "#8230C8", category: "entertainment", defaultAmount: 299, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "paramount_plus", name: "Paramount+", logo: "https://cdn.simpleicons.org/paramountplus/0064FF", color: "#0064FF", category: "entertainment", defaultAmount: 5.99, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "peacock", name: "Peacock", logo: "https://cdn.simpleicons.org/peacock/000000", color: "#000000", category: "entertainment", defaultAmount: 5.99, defaultCurrency: "USD", defaultCycle: "monthly" },
 
   // ── Music ──
   { slug: "spotify", name: "Spotify", logo: "https://cdn.simpleicons.org/spotify/1DB954", color: "#1DB954", category: "music", defaultAmount: 119, defaultCurrency: "INR", defaultCycle: "monthly" },
   { slug: "apple_music", name: "Apple Music", logo: "https://cdn.simpleicons.org/applemusic/FA2D48", color: "#FA2D48", category: "music", defaultAmount: 99, defaultCurrency: "INR", defaultCycle: "monthly" },
   { slug: "youtube_music", name: "YouTube Music", logo: "https://cdn.simpleicons.org/youtubemusic/FF0000", color: "#FF0000", category: "music", defaultAmount: 109, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "amazon_music", name: "Amazon Music", logo: "https://cdn.simpleicons.org/amazonmusic/00A8E1", color: "#00A8E1", category: "music", defaultAmount: 9.99, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "jiosaavn", name: "JioSaavn", logo: "https://cdn.simpleicons.org/jiosaavn/2BC588", color: "#2BC588", category: "music", defaultAmount: 99, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "gaana", name: "Gaana", logo: "https://cdn.simpleicons.org/gaana/E72C30", color: "#E72C30", category: "music", defaultAmount: 99, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "tidal", name: "Tidal", logo: "https://cdn.simpleicons.org/tidal/000000", color: "#000000", category: "music", defaultAmount: 10.99, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "deezer", name: "Deezer", logo: "https://cdn.simpleicons.org/deezer/EF5466", color: "#EF5466", category: "music", defaultAmount: 10.99, defaultCurrency: "USD", defaultCycle: "monthly" },
 
   // ── AI & Dev Tools ──
   { slug: "chatgpt_plus", name: "ChatGPT Plus", logo: "https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/openai.svg", color: "#10A37F", category: "development", defaultAmount: 20, defaultCurrency: "USD", defaultCycle: "monthly" },
@@ -34,6 +43,9 @@ export const POPULAR_SERVICES: ServiceInfo[] = [
   { slug: "gemini_advanced", name: "Gemini Advanced", logo: "https://cdn.simpleicons.org/googlegemini/4285F4", color: "#4285F4", category: "development", defaultAmount: 19.99, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "github_pro", name: "GitHub Pro", logo: "https://cdn.simpleicons.org/github/F5F5F5", color: "#24292F", category: "development", defaultAmount: 4, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "perplexity_pro", name: "Perplexity Pro", logo: "https://cdn.simpleicons.org/perplexity/1FB8CD", color: "#1FB8CD", category: "development", defaultAmount: 20, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "cursor", name: "Cursor", logo: "https://cdn.simpleicons.org/cursor/000000", color: "#0E0E0E", category: "development", defaultAmount: 20, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "openai_api", name: "OpenAI API", logo: "https://cdn.simpleicons.org/openai/000000", color: "#10A37F", category: "development", defaultAmount: 5, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "midjourney", name: "Midjourney", logo: "https://cdn.simpleicons.org/midjourney/000000", color: "#000000", category: "development", defaultAmount: 10, defaultCurrency: "USD", defaultCycle: "monthly" },
 
   // ── Productivity ──
   { slug: "notion", name: "Notion", logo: "https://cdn.simpleicons.org/notion/000000", color: "#000000", category: "productivity", defaultAmount: 10, defaultCurrency: "USD", defaultCycle: "monthly" },
@@ -48,6 +60,11 @@ export const POPULAR_SERVICES: ServiceInfo[] = [
   { slug: "grammarly", name: "Grammarly", logo: "https://cdn.simpleicons.org/grammarly/15C39A", color: "#15C39A", category: "productivity", defaultAmount: 12, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "linear", name: "Linear", logo: "https://cdn.simpleicons.org/linear/5E6AD2", color: "#5E6AD2", category: "productivity", defaultAmount: 8, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "todoist", name: "Todoist", logo: "https://cdn.simpleicons.org/todoist/E44332", color: "#E44332", category: "productivity", defaultAmount: 4, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "icloud_plus", name: "iCloud+", logo: "https://cdn.simpleicons.org/icloud/3693F3", color: "#3693F3", category: "productivity", defaultAmount: 75, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "linkedin_premium", name: "LinkedIn Premium", logo: "https://cdn.simpleicons.org/linkedin/0A66C2", color: "#0A66C2", category: "productivity", defaultAmount: 29.99, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "telegram_premium", name: "Telegram Premium", logo: "https://cdn.simpleicons.org/telegram/26A5E4", color: "#26A5E4", category: "productivity", defaultAmount: 4.99, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "asana", name: "Asana", logo: "https://cdn.simpleicons.org/asana/F06A6A", color: "#F06A6A", category: "productivity", defaultAmount: 10.99, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "trello", name: "Trello", logo: "https://cdn.simpleicons.org/trello/0079BF", color: "#0079BF", category: "productivity", defaultAmount: 5, defaultCurrency: "USD", defaultCycle: "monthly" },
 
   // ── Cloud / Hosting ──
   { slug: "vercel", name: "Vercel", logo: "https://cdn.simpleicons.org/vercel/000000", color: "#000000", category: "development", defaultAmount: 20, defaultCurrency: "USD", defaultCycle: "monthly" },
@@ -65,14 +82,27 @@ export const POPULAR_SERVICES: ServiceInfo[] = [
   // ── Education ──
   { slug: "duolingo_super", name: "Duolingo Super", logo: "https://cdn.simpleicons.org/duolingo/58CC02", color: "#58CC02", category: "education", defaultAmount: 6.99, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "coursera_plus", name: "Coursera Plus", logo: "https://cdn.simpleicons.org/coursera/0056D2", color: "#0056D2", category: "education", defaultAmount: 59, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "udemy_plan", name: "Udemy Personal", logo: "https://cdn.simpleicons.org/udemy/A435F0", color: "#A435F0", category: "education", defaultAmount: 16.58, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "skillshare", name: "Skillshare", logo: "https://cdn.simpleicons.org/skillshare/002333", color: "#002333", category: "education", defaultAmount: 14, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "masterclass", name: "MasterClass", logo: "https://cdn.simpleicons.org/internetarchive/000000", color: "#000000", category: "education", defaultAmount: 15, defaultCurrency: "USD", defaultCycle: "monthly" },
 
   // ── Health & Fitness ──
   { slug: "headspace", name: "Headspace", logo: "https://cdn.simpleicons.org/headspace/F47D31", color: "#F47D31", category: "health_fitness", defaultAmount: 12.99, defaultCurrency: "USD", defaultCycle: "monthly" },
   { slug: "cultfit", name: "Cult.fit", logo: "https://cdn.simpleicons.org/codeforces/FF1744", color: "#FF1744", category: "health_fitness", defaultAmount: 999, defaultCurrency: "INR", defaultCycle: "monthly" },
 
-  // ── Indian Services ──
+  // ── Food / Shopping / Mobility (India + global) ──
   { slug: "swiggy_one", name: "Swiggy One", logo: "https://cdn.simpleicons.org/swiggy/FC8019", color: "#FC8019", category: "shopping", defaultAmount: 99, defaultCurrency: "INR", defaultCycle: "monthly" },
   { slug: "zomato_gold", name: "Zomato Gold", logo: "https://cdn.simpleicons.org/zomato/E23744", color: "#E23744", category: "shopping", defaultAmount: 600, defaultCurrency: "INR", defaultCycle: "yearly" },
+  { slug: "uber_one", name: "Uber One", logo: "https://cdn.simpleicons.org/uber/000000", color: "#000000", category: "shopping", defaultAmount: 9.99, defaultCurrency: "USD", defaultCycle: "monthly" },
+  { slug: "blinkit", name: "Blinkit", logo: "https://cdn.simpleicons.org/blinkit/F8CB46", color: "#F8CB46", category: "shopping", defaultAmount: 99, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "zepto", name: "Zepto", logo: "https://cdn.simpleicons.org/zepto/A91A55", color: "#A91A55", category: "shopping", defaultAmount: 199, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "amazon_pay_later", name: "Amazon Pay Later", logo: "https://cdn.simpleicons.org/amazonpay/FF9900", color: "#FF9900", category: "shopping" },
+  { slug: "times_prime", name: "Times Prime", logo: "https://cdn.simpleicons.org/thetimes/000000", color: "#1A1A1A", category: "shopping", defaultAmount: 1199, defaultCurrency: "INR", defaultCycle: "yearly" },
+
+  // ── Connectivity / Telco ──
+  { slug: "airtel", name: "Airtel", logo: "https://cdn.simpleicons.org/airtel/E40000", color: "#E40000", category: "shopping", defaultAmount: 299, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "jio", name: "Jio", logo: "https://cdn.simpleicons.org/jio/0F3CC9", color: "#0F3CC9", category: "shopping", defaultAmount: 299, defaultCurrency: "INR", defaultCycle: "monthly" },
+  { slug: "vi", name: "Vi", logo: "https://cdn.simpleicons.org/vodafone/E60000", color: "#E60000", category: "shopping", defaultAmount: 299, defaultCurrency: "INR", defaultCycle: "monthly" },
 
   // ── Security ──
   { slug: "onepassword", name: "1Password", logo: "https://cdn.simpleicons.org/1password/0094F5", color: "#0094F5", category: "productivity", defaultAmount: 2.99, defaultCurrency: "USD", defaultCycle: "monthly" },
@@ -137,6 +167,24 @@ const SERVICE_LOGO_ASSETS: Record<string, string> = {
   patreon: brandIcon("patreon.webp"),
   medium: brandIcon("medium.webp"),
   substack: brandIcon("substack.webp"),
+  // Newly added (already shipped as local assets) — wire them up so the modal
+  // shows the polished WebP instead of the simpleicons CDN fallback.
+  amazon_music: brandIcon("amazonmusic.webp"),
+  jiosaavn: brandIcon("jiosaavn.webp"),
+  gaana: brandIcon("gaana.webp"),
+  tidal: brandIcon("tidal.webp"),
+  deezer: brandIcon("deezer.webp"),
+  sonyliv: brandIcon("sonyliv.webp"),
+  zee5: brandIcon("zee5.webp"),
+  paramount_plus: brandIcon("paramountplus.webp"),
+  peacock: brandIcon("peacock.webp"),
+  uber_one: brandIcon("uberone.webp"),
+  airtel: brandIcon("airtel.webp"),
+  jio: brandIcon("jio.webp"),
+  times_prime: brandIcon("timesprime.webp"),
+  udemy_plan: brandIcon("udemyplan.webp"),
+  asana: brandIcon("asana.webp"),
+  trello: brandIcon("trello.webp"),
 };
 
 for (const service of POPULAR_SERVICES) {
@@ -208,6 +256,37 @@ const SERVICE_ALIASES: Record<string, string> = {
   creativecloud: "adobe_cc",
   adobe_creative_cloud: "adobe_cc",
 
+  // Newly mapped aliases for the wider service catalogue
+  jiosaavn_pro: "jiosaavn",
+  saavn: "jiosaavn",
+  amazonmusic: "amazon_music",
+  amazon_music_unlimited: "amazon_music",
+  cursor_pro: "cursor",
+  uber: "uber_one",
+  uberone: "uber_one",
+  vi_postpaid: "vi",
+  vi_prepaid: "vi",
+  airtel_prepaid: "airtel",
+  airtel_postpaid: "airtel",
+  jio_prepaid: "jio",
+  jio_postpaid: "jio",
+  blink_it: "blinkit",
+  zee_5: "zee5",
+  zee_5_premium: "zee5",
+  sony_liv: "sonyliv",
+  sonyliv_premium: "sonyliv",
+  paramountplus: "paramount_plus",
+  paramount: "paramount_plus",
+  hbo: "max",
+  hbo_max: "max",
+  icloud: "icloud_plus",
+  iclouddrive: "icloud_plus",
+  icloud_drive: "icloud_plus",
+  linkedin: "linkedin_premium",
+  telegram: "telegram_premium",
+  udemy: "udemy_plan",
+  master_class: "masterclass",
+
   // Other common collapses
   duolingo: "duolingo_super",
   notionai: "notion",
@@ -263,6 +342,6 @@ export const SERVICE_CATEGORIES = [
   { slug: "gaming", label: "Gaming", iconName: "gamepad-2" },
   { slug: "education", label: "Education", iconName: "book-open" },
   { slug: "health_fitness", label: "Health", iconName: "heart" },
-  { slug: "shopping", label: "Shopping", iconName: "shopping-bag" },
+  { slug: "shopping", label: "Shopping & Mobility", iconName: "shopping-bag" },
   { slug: "news", label: "News", iconName: "newspaper" },
 ] as const;

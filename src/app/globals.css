@@ -47,7 +47,7 @@
   --radius-3xl: calc(var(--radius) * 2);
   --radius-4xl: calc(var(--radius) * 2.4);
 
-  /* Driped Neo brand tokens \u2014 mirror @driped/neo */
+  /* Driped Neo brand tokens — mirror @driped/neo */
   --color-neo-gold: var(--neo-gold);
   --color-neo-gold-deep: var(--neo-gold-deep);
   --color-neo-cream: var(--neo-cream);
@@ -97,6 +97,9 @@
   --neo-ink-mid: #4A4338;
   --neo-ink-low: #7A6E63;
   --neo-ink-ghost: #C8BFAC;
+  /* Light-mode `--neo-rule` resolves to a slightly softened ink so cards
+     in light theme also get the same gentle outline behaviour. */
+  --neo-rule: color-mix(in srgb, var(--neo-ink) 78%, var(--neo-surface) 22%);
   --neo-gold: #C4894B;
   --neo-gold-deep: #A26F37;
   --neo-gold-soft: #F5E7D3;
@@ -115,13 +118,13 @@
   --brutal-shadow-gold: 4px 4px 0px var(--neo-gold);
   --brutal-border: 2px solid var(--neo-ink);
 
-  /* Logo containers \u2014 theme-aware. Light: pure white (3D paper look).
+  /* Logo containers — theme-aware. Light: pure white (3D paper look).
      Dark: warm cream so white brand logos stay visible and the tile
      doesn't blast pure white into your face. */
   --logo-bg: #FFFFFF;
   --logo-rim: color-mix(in srgb, var(--neo-ink) 12%, transparent);
 
-  /* Text hierarchy helpers \u2014 pair with surface tokens below */
+  /* Text hierarchy helpers — pair with surface tokens below */
   --text-strong: var(--neo-ink);
   --text-body: var(--neo-ink-mid);
   --text-subtle: var(--neo-ink-low);
@@ -187,6 +190,13 @@
   --neo-ink-mid: #C8BFAC;
   --neo-ink-low: #8C836F;
   --neo-ink-ghost: #4A4338;
+  /*
+   * Neo-rule: a softened cream used specifically for border/separator
+   * lines. We keep the bright cream `--neo-ink` for text and shadows so
+   * the brutal hierarchy still reads, but the rules are pulled back about
+   * 28% toward the surface so 2px outlines no longer scream "white".
+   */
+  --neo-rule: color-mix(in srgb, var(--neo-ink) 72%, var(--neo-surface) 28%);
   --neo-gold: #E8B168;
   --neo-gold-deep: #C4894B;
   --neo-gold-soft: #3A2E1E;
@@ -197,7 +207,7 @@
   --neo-lilac: #D9BBFF;
   --neo-lemon: #FFE58A;
 
-  /* Shadows \u2014 cream on dark */
+  /* Shadows — cream on dark */
   --brutal-shadow: 4px 4px 0px var(--neo-ink);
   --brutal-shadow-sm: 2px 2px 0px var(--neo-ink);
   --brutal-shadow-lg: 6px 6px 0px var(--neo-ink);
@@ -205,11 +215,11 @@
   --brutal-shadow-gold: 4px 4px 0px var(--neo-gold);
   --brutal-border: 2px solid var(--neo-ink);
 
-  /* Logo containers \u2014 warm cream in dark so brand colours still pop */
+  /* Logo containers — warm cream in dark so brand colours still pop */
   --logo-bg: #F7F1E4;
   --logo-rim: color-mix(in srgb, var(--neo-gold) 35%, transparent);
 
-  /* Text hierarchy \u2014 bright cream primary, softened for body */
+  /* Text hierarchy — bright cream primary, softened for body */
   --text-strong: var(--neo-ink);
   --text-body: var(--neo-ink-mid);
   --text-subtle: var(--neo-ink-low);
@@ -227,7 +237,7 @@
   --lime: #D6F56A;
   --orange: #FFB366;
 
-  /* Charts \u2014 neo pastels that pop on near-black */
+  /* Charts — neo pastels that pop on near-black */
   --chart-1: var(--neo-gold);
   --chart-2: var(--neo-lilac);
   --chart-3: var(--neo-mint);
@@ -251,9 +261,14 @@
   }
   body {
     @apply bg-background text-foreground;
+    /* Belt-and-braces: kill any stray horizontal page scroll caused by
+       fixed-width grids, framer-motion transforms, or the mobile sidebar
+       sliding off-screen. The dashboard is a vertical document. */
+    overflow-x: hidden;
   }
   html {
     @apply font-sans scroll-smooth;
+    overflow-x: hidden;
   }
 }
 
@@ -262,7 +277,9 @@
   /* Card variants */
   .brutal-card {
     @apply rounded-xl bg-card border-2 transition-all duration-150;
-    border-color: var(--neo-ink);
+    /* Soft cream border instead of pure ink so 2px rules feel intentional,
+       not loud. The drop-shadow keeps the brutal silhouette. */
+    border-color: var(--neo-rule);
     box-shadow: var(--brutal-shadow);
   }
   .brutal-card:hover {
@@ -271,7 +288,7 @@
   }
   .brutal-card-flat {
     @apply rounded-xl bg-card border-2;
-    border-color: var(--neo-ink);
+    border-color: var(--neo-rule);
     box-shadow: var(--brutal-shadow-sm);
   }
   .brutal-card-raised {
@@ -304,7 +321,7 @@
     box-shadow: 4px 4px 0 var(--danger);
   }
 
-  /* Stat tile \u2014 pastel-accented hero card for KPIs */
+  /* Stat tile — pastel-accented hero card for KPIs */
   .brutal-stat {
     @apply rounded-xl border-2 p-4 transition-all duration-150;
     border-color: var(--neo-ink);
@@ -324,7 +341,9 @@
   /* Buttons */
   .brutal-btn {
     @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 px-4 py-2 font-bold transition-all duration-100 active:translate-x-[2px] active:translate-y-[2px];
-    border-color: var(--neo-ink);
+    /* Same softened cream rule as cards — buttons no longer feel like
+       they're outlined in highlighter pen against a dark dashboard. */
+    border-color: var(--neo-rule);
     box-shadow: var(--brutal-shadow-sm);
     font-family: var(--font-heading);
   }
@@ -359,7 +378,7 @@
   /* Inputs */
   .brutal-input {
     @apply rounded-lg border-2 bg-background px-3 py-2 text-sm font-medium transition-all outline-none;
-    border-color: var(--neo-ink);
+    border-color: var(--neo-rule);
     box-shadow: var(--brutal-shadow-sm);
   }
   .brutal-input:focus {
@@ -376,11 +395,11 @@
   }
   .brutal-pill {
     @apply inline-flex items-center rounded-full border-2 px-3 py-1 text-xs font-bold;
-    border-color: var(--neo-ink);
+    border-color: var(--neo-rule);
     background: var(--neo-surface);
   }
 
-  /* Surface helpers \u2014 sections that aren't cards but need visual lift */
+  /* Surface helpers — sections that aren't cards but need visual lift */
   .brutal-surface {
     background: var(--neo-surface);
     border: 2px solid var(--neo-ink);
@@ -393,7 +412,7 @@
     box-shadow: inset 2px 2px 0 var(--neo-ink-ghost);
   }
 
-  /* Legacy compat \u2014 keep old class names alive, map to new look */
+  /* Legacy compat — keep old class names alive, map to new look */
   .glass-card {
     @apply rounded-xl bg-card border-2 transition-all duration-150;
     border-color: var(--neo-ink);
